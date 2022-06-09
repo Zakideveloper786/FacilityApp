@@ -1,0 +1,89 @@
+﻿@using FacilityApp.ViewModels
+@model IEnumerable<MaintenanceVM>
+@{
+    ViewData["Title"] = "User Registration";
+   
+	Layout = "_Layout";
+
+}
+<style>
+    .paginate_button
+    {
+        padding: 5px;
+    }
+    #customerDatatable_filter
+    {
+        text-align :right;
+        padding : 3px;
+    }
+</style>
+<style rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"></style>
+<script type="text/javascript">
+$(document).ready(function () {
+    $('#customerDatatable').DataTable();
+});
+</script>
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Final Check</h2>
+		</div>
+        @*<div class="col-6 text-end">
+            <a asp-controller="Maintenance" asp-action="Create" class="btn btn-primary">
+               <i class="bi bi-plus-circle"></i> &nbsp;  Add  Maintenance Request
+			</a>
+		</div>
+	</div>*@
+    <br /><br />
+
+<table id="customerDatatable" class="table table-bordered table-striped customerDatatable" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+             Tenant  Name 
+			</th>
+            <th>
+             Issue  Type
+			</th>
+            <th>
+                User  Name
+			</th>
+            <th></th>
+		</tr>
+	</thead>
+    <tbody>
+        @foreach(var obj in Model)
+        {
+            <tr>
+                <td width="25%">
+                    @obj.TenantName
+				</td>
+                <td width="25%">
+                    @obj.IssueType
+				</td>
+                <td width="25%">
+                    @obj.UserName
+				</td>
+                <td>
+                    <div class="w-75 btn-group" role="group">
+                        <a asp-controller="Maintenance" asp-action="Edit" asp-route-id="@obj.MaintananceId"
+                        class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Edit</a>
+                        <a asp-controller="Maintenance" asp-action="Delete" asp-route-id="@obj.MaintananceId"
+                        class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a>
+					</div>
+				</td>
+			</tr>
+        }
+    </tbody>
+
+</table>
+
+
+</div>
+
+@section Scripts
+{
+ 
+    <script src=" https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+}

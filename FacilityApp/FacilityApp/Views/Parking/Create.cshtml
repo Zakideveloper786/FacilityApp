@@ -1,0 +1,96 @@
+﻿
+@model Parking
+@{
+	Layout = "_Layout";
+}
+
+<form method="post" asp-controller="Parking" asp-action="Create"> 
+	 <script type="text/javascript">
+            $(document).ready(function () {
+                $('.fcdatepicker').datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    format: "dd/mm/yyyy",
+                });
+            });
+        </script>
+	<div class="container   p-5	">
+	<div class="  ">
+		<div class="row ">
+			<h2 class="text-primary"> Parking Details</h2>
+			<hr />
+		</div>
+	
+		@*<div asp-validation-summary="All"></div>*@
+		<div class="row ">
+		<div class="mb-3 col-sm-6">
+			<label asp-for="TenantId"></label>
+	<select  asp-for="TenantId" class="form-control"  asp-items='@(new SelectList(@ViewBag.tenants,"TenantId","Name"))'></select>
+		
+			<span asp-validation-for="TenantId" class="text-danger"></span>
+		</div>
+		</div>
+		@*<div class="row ">
+		<div class="mb-3 col-sm-6">
+			<label asp-for="TenantId"></label>
+			<input asp-for="TenantId" class="form-control" />
+			<span asp-validation-for="TenantId" class="text-danger"></span>
+		</div></div>*@
+	
+		@*<div class="mb-3">
+			<label asp-for="RoleId"></label>
+			<select  asp-for="RoleId" class="form-control"  asp-items='@(new SelectList(@ViewBag.Roles,"RoleId","RoleName"))'> </select>
+			<span asp-validation-for="EmailID" class="text-danger"></span>
+		</div>*@
+
+		
+			<div class="row ">
+		<div class="mb-3 col-sm-6">
+			<label asp-for="ParkingNumber"></label>
+			<input  asp-for="ParkingNumber" class="form-control"   rows="3" cols="40"/>
+			<span asp-validation-for="ParkingNumber" class="text-danger"></span>
+		</div>
+		</div>
+					<div class="row ">
+		<div class="mb-3 col-sm-6">
+			<label asp-for="PlateNumber"></label>
+			<input  asp-for="PlateNumber" class="form-control"   rows="3" cols="40"/>
+			<span asp-validation-for="PlateNumber" class="text-danger"></span>
+		</div>
+		</div>
+			<div class="row ">
+		<div class="mb-3 col-sm-6">
+			<label asp-for="StartDate"></label>
+			<input  asp-for="StartDate" class="form-control"   rows="3" cols="40"/>
+			<span asp-validation-for="StartDate" class="text-danger"></span>
+		</div>
+		</div>
+		<div class="row ">
+		<div class="mb-3 col-sm-6">
+			<label asp-for="EndDate"></label>
+			<input  asp-for="EndDate" class="form-control"   rows="3" cols="40"/>
+			<span asp-validation-for="EndDate" class="text-danger"></span>
+		</div>
+		</div>
+			<div class="row ">
+		<div class="mb-3 col-sm-6">
+			<label asp-for="PaymentStatus"></label>
+			<input  asp-for="PaymentStatus" class="form-control"   rows="3" cols="40"/>
+			<span asp-validation-for="PaymentStatus" class="text-danger"></span>
+		</div>
+		</div>
+	<button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+		<a asp-controller="Parking" asp-action="Index" class="btn btn-secondary" style="width:150px">
+			Back to List
+		</a>
+	</div>
+	</div>
+</form>
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+
+}
+
