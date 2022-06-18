@@ -1,0 +1,115 @@
+﻿
+@model User
+@{
+	Layout = "_Layout";
+}
+
+<form method="post" asp-controller="User" asp-action="Edit"> 
+	 <script type="text/javascript">
+            $(document).ready(function () {
+				//$('#RoleId').on('change',function(){
+				////	alert($('#RoleId').val());
+				//if( $('#RoleId').val()==5)
+				//{
+				//	$('.tenantrow').show();
+				//}
+				//else{
+				//	$('.tenantrow').hide();
+
+				//}
+				//});
+                $('.fcdatepicker').datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    format: "dd/mm/yyyy",
+                });
+            });
+        </script>
+		<div class="container   p-5	">
+	<div class="  ">
+		<div class="row ">
+					<input asp-for="UserId" class="form-control"  hidden/>
+
+			<h2 class="text-primary"> User Details</h2>
+			<hr />
+		</div>
+			<div class="row ">
+		<div class="mb-3 col-sm-6">
+			<label asp-for="BuildingId"></label>
+			<select  asp-for="BuildingId" class="form-control"  asp-items='@(new SelectList(@ViewBag.buildings,"BuildingId","Name"))'> </select>
+			<span asp-validation-for="BuildingId" class="text-danger"></span>
+		</div>
+		</div>
+	<div class="row ">
+		<div class="mb-3 col-sm-6">
+			<label asp-for="RoleId"></label>
+			<select  asp-for="RoleId" class="form-control"  asp-items='@(new SelectList(@ViewBag.roles,"RoleId","RoleName"))'> </select>
+			<span asp-validation-for="RoleId" class="text-danger"></span>
+		</div>
+		</div>
+
+		@*<div asp-validation-summary="All"></div>*@
+		<div class="row ">
+		<div class="mb-3 col-sm-6">
+			<label asp-for="Name"></label>
+			<input asp-for="Name" class="form-control" />
+			<span asp-validation-for="Name" class="text-danger"></span>
+		</div>
+		</div>
+		<div class="row  emailrow">
+		<div class="mb-3 col-sm-6">
+			<label asp-for="EmailID"></label>
+			<input asp-for="EmailID" class="form-control" />
+			<span asp-validation-for="EmailID" class="text-danger"></span>
+		</div>
+		</div>
+				<div class="row ">
+		<div class="mb-3 col-sm-6">
+			<label asp-for="MobileNo"></label>
+			<input  asp-for="MobileNo" class="form-control"   />
+			<span asp-validation-for="MobileNo" class="text-danger"></span>
+		</div>
+		</div>
+				<div class="row " hidden>
+		<div class="mb-3 col-sm-6">
+			<label asp-for="TenantId"></label>
+			<input  asp-for="TenantId" class="form-control"   />
+			<span asp-validation-for="TenantId" class="text-danger"></span>
+		</div>
+		</div>
+			<div class="row ">
+		<div class="mb-3 col-sm-6">
+			<label asp-for="UserName"></label>
+			<input asp-for="UserName" class="form-control" />
+			<span asp-validation-for="UserName" class="text-danger"></span>
+		</div>
+		</div>
+					<div class="row ">
+		<div class="mb-3 col-sm-6">
+			<label asp-for="Password"></label>
+			<input  asp-for="Password" class="form-control"  type="password" />
+			<span asp-validation-for="Password" class="text-danger" ></span>
+		</div>
+		</div>
+					
+			<button type="submit" class="btn btn-primary" style="width:150px">Edit</button>
+		<a asp-controller="User" asp-action="Index" class="btn btn-secondary" style="width:150px">
+			Back to List
+		</a>
+
+		</div>
+	
+	
+	
+	</div>
+	</div>
+
+</form>
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+
+}
+

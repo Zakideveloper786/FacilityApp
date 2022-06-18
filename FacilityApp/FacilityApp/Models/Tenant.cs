@@ -2,45 +2,62 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using static FacilityApp.Core.Statics;
-
 namespace FacilityApp.Models
 {
     public class Tenant
     {
         [Key]
         public int TenantId { get; set; }
+       
         [DisplayName("Tenant Name")]
         public string Name { get; set; }
         [DisplayName("Mobile No")]
         public string MobileNo { get; set; }
-        public string Password { get; set; }
         [DisplayName("Email ID")]
         public string EmailId { get; set; }
         [DisplayName("Address")]
-        public string? Address { get; set; }
-        [DisplayName("BuildingName")]
-        public int? BuildingId { get; set; }
+        public string Address { get; set; }
+        [DisplayName("Emirates ID")]
+        public string EmiratedId { get; set; }
+        [DisplayName("PassPort No")]
+        public string PassportNo { get; set; }
+        [DisplayName("No of Family Members")]
+        public int FamilyCount { get; set; }
 
-        [DisplayName("Flat Type")]
-        public int? FlatTypeId { get; set; }
 
 
-        [DisplayName("Flat No")]
-        public string FlatNo { get; set; }
+        // Flat
 
-        [DisplayName("Start  Tenancy Date")]
-        public DateTime?  StartDate { get; set; }
+        
 
-        [DisplayName("End Tenancy Date")]
-        public DateTime? EndDate { get; set; }
+        // Payment details
 
-        public RecordState Status { get; set; }
+        //[DisplayName("Payment Type")]
+        //public int? PaymentTypeId { get; set; }
+        //[DisplayName("Cheque No")]
 
-        public string CreatedBy { get; set; } = "System";
+        //public int ChequeNo { get; set; }
+        //[DisplayName("Payment Clearence")]
+
+        //public bool PaymentClearence { get; set; }
+        //[DisplayName("Reason")]
+
+        //public string? Reason { get; set; }
+        //[DisplayName("Notification Sent")]
+
+        //public bool NotificationSent { get; set; }
+
+        //[DisplayName("Reminders")]
+
+        //public int Reminders { get; set; }
+
+        public int?CreatedBy { get; set; } = 1;
+
+
 
         public DateTime CreatedDate { get; set; } = DateTime.Now;
-        public string? UpdatedBy { get; set; } 
+
+        public int? UpdatedBy { get; set; } = 1;
 
         public DateTime? UpdatedDate { get; set; } 
 

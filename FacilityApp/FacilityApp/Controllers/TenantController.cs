@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using FacilityApp.Data;
 
 using FacilityApp.Models;
+using FacilityApp.ViewModels;
 
 namespace FacilityApp.Controllers
 {
@@ -48,18 +49,22 @@ namespace FacilityApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Tenant obj)
+        public IActionResult Create(TenantRegistration obj)
         {
             //if (obj.Name == obj.DisplayOrder.ToString())
             //{
             //    ModelState.AddModelError("name", "The DisplayOrder cannot exactly match the Name.");
             //}
-            obj.Password = "";
+           
             if (ModelState.IsValid)
             {
-                var tenant = obj;
+                var tenant = obj.Tenant;
                 AddDetais(tenant);
                 _db.Tenant.Add(tenant);
+                var details = obj.TenantFlatDetails;
+                details.TenantId = tenant.TenantId;
+                _db.TenantFlatDetails.Add(details);
+                AddDetais(details);
 
                 _db.SaveChanges();
                 TempData["success"] = "Tenant  created successfully";
@@ -75,12 +80,22 @@ namespace FacilityApp.Controllers
             return obj;
         }
 
-
+        //POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Edit(int? id)
         {
             if (id == null || id == 0)
             {
                 return NotFound();
+            }
+
+            TenantRegistration registration = new TenantRegistration();
+            registration.Tenant = _db.Tenant.Where(x => x.TenantId == id).FirstOrDefault();
+
+            if(registration.Tenant !=null)
+            {
+                registration.TenantFlatDetails = _db.TenantFlatDetails.Where(x => x.TenantId == id).FirstOrDefault();
             }
 
             var flattypes = _db.FlatTypes.Select(x => new { x.FlatTypeId, x.Name }).ToList();
@@ -90,36 +105,18 @@ namespace FacilityApp.Controllers
             var buildings = _db.Building.Select(x => new { x.BuildingId, x.Name }).ToList();
             buildings.Insert(0, new { BuildingId = 0, Name = "--Select--" });
             ViewBag.buildings = buildings;
-            var record = _db.Tenant.Find(id);
+          
             //var categoryFromDbFirst = _db.Categories.FirstOrDefault(u=>u.Id==id);
             //var categoryFromDbSingle = _db.Categories.SingleOrDefault(u => u.Id == id);
 
-            if (record == null)
+            if (registration.Tenant ==null)
             {
                 return NotFound();
             }
 
-            return View(record);
+            return View(registration);
         }
 
-        //POST
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(Building obj)
-        {
-            //if (obj.Name == obj.DisplayOrder.ToString())
-            //{
-            //    ModelState.AddModelError("name", "The DisplayOrder cannot exactly match the Name.");
-            //}
-            if (ModelState.IsValid)
-            {
-                _db.Building.Update(obj);
-                _db.SaveChanges();
-                TempData["success"] = "Tenant updated successfully";
-                return RedirectToAction("Index");
-            }
-            return View(obj);
-        }
 
         public IActionResult Delete(int? id)
         {

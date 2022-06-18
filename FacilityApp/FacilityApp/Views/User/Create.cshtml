@@ -7,6 +7,18 @@
 <form method="post" asp-controller="User" asp-action="Create"> 
 	 <script type="text/javascript">
             $(document).ready(function () {
+		//		console.log('ready function');
+				//$('#RoleId').on('change',function(){
+				////	alert($('#RoleId').val());
+				//if( $('#RoleId').val()==5)
+				//{
+				//	$('.tenantrow').show();
+				//}
+				//else{
+				//	$('.tenantrow').hide();
+
+				//}
+				//});
                 $('.fcdatepicker').datepicker({
                     changeMonth: true,
                     changeYear: true,
@@ -20,7 +32,20 @@
 			<h2 class="text-primary"> User Details</h2>
 			<hr />
 		</div>
-	
+		@*<div class="row ">
+		<div class="mb-3 col-sm-6">
+			<label asp-for="BuildingId"></label>
+			<select  asp-for="BuildingId" class="form-control"  asp-items='@(new SelectList(@ViewBag.buildings,"BuildingId","Name"))'> </select>
+			<span asp-validation-for="BuildingId" class="text-danger"></span>
+		</div>
+		</div>*@
+	<div class="row ">
+		<div class="mb-3 col-sm-6">
+			<label asp-for="RoleId"></label>
+			<select  asp-for="RoleId" class="form-control"  asp-items='@(new SelectList(@ViewBag.roles,"RoleId","RoleName"))'> </select>
+			<span asp-validation-for="RoleId" class="text-danger"></span>
+		</div>
+		</div>
 		@*<div asp-validation-summary="All"></div>*@
 		<div class="row ">
 		<div class="mb-3 col-sm-6">
@@ -29,6 +54,7 @@
 			<span asp-validation-for="Name" class="text-danger"></span>
 		</div>
 		</div>
+
 		<div class="row ">
 		<div class="mb-3 col-sm-6">
 			<label asp-for="EmailID"></label>
@@ -43,20 +69,27 @@
 			<span asp-validation-for="MobileNo" class="text-danger"></span>
 		</div>
 		</div>
+				<div class="row tenantrow " style="display:none">
+		<div class="mb-3 col-sm-6">
+			<label asp-for="TenantId"></label>
+			<input  asp-for="TenantId" class="form-control"   />
+			<span asp-validation-for="TenantId" class="text-danger"></span>
+		</div>
+		</div>
 				<div class="row ">
 		<div class="mb-3 col-sm-6">
-			<label asp-for="Designation"></label>
-			<input  asp-for="Designation" class="form-control"   />
-			<span asp-validation-for="Designation" class="text-danger"></span>
-		</div>
+			<label asp-for="UserName"></label>
+			<input asp-for="UserName" class="form-control" />
+			<span asp-validation-for="UserName" class="text-danger"></span>
 		</div>
 					<div class="row ">
 		<div class="mb-3 col-sm-6">
-			<label asp-for="RoleId"></label>
-			<select  asp-for="RoleId" class="form-control"  asp-items='@(new SelectList(@ViewBag.Roles,"RoleId","RoleName"))'> </select>
-			<span asp-validation-for="RoleId" class="text-danger"></span>
+			<label asp-for="Password"></label>
+			<input  asp-for="Password" class="form-control"  type="password" />
+			<span asp-validation-for="Password" class="text-danger" ></span>
 		</div>
 		</div>
+					
 			<button type="submit" class="btn btn-primary" style="width:150px">Create</button>
 		<a asp-controller="User" asp-action="Index" class="btn btn-secondary" style="width:150px">
 			Back to List

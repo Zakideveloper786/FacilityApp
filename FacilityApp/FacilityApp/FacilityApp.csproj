@@ -8,9 +8,20 @@
 
   <ItemGroup>
     <Compile Remove="Views\Category\**" />
+    <Compile Remove="Views\Tenant\**" />
     <Content Remove="Views\Category\**" />
+    <Content Remove="Views\Tenant\**" />
     <EmbeddedResource Remove="Views\Category\**" />
+    <EmbeddedResource Remove="Views\Tenant\**" />
     <None Remove="Views\Category\**" />
+    <None Remove="Views\Tenant\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Building\Delete.cshtml" />
+    <Content Remove="Views\Building\Edit.cshtml" />
+    <Content Remove="Views\User\Delete.cshtml" />
+    <Content Remove="Views\User\Edit.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +35,13 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Building\Create.cshtml" />
+    <None Include="Views\Building\Index.cshtml" />
+    <None Include="Views\Tenant\Create.cshtml" />
+    <None Include="Views\Tenant\Index.cshtml" />
   </ItemGroup>
 
 </Project>

@@ -12,7 +12,7 @@ public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<FacilityA
     public FacilityAppDbContext CreateDbContext(string[] args)
     {
         var optionsBuilder = new DbContextOptionsBuilder<FacilityAppDbContext>();
-        optionsBuilder.UseSqlServer("Server=.;Database=FacilityDB;Trusted_Connection=True;");
+        optionsBuilder.UseSqlServer("Server=.;Database=FacilityApp;Trusted_Connection=True;");
 
         return new FacilityAppDbContext(optionsBuilder.Options);
     }
@@ -23,20 +23,25 @@ public class FacilityAppDbContext :DbContext
     {
     }
 
-    public DbSet<Category> Categories {  get; set; }
+    public DbSet<Flat> Flat {  get; set; }
+    public DbSet<Category> Categories { get; set; }
+    public DbSet<VisitingPurpose> VisitingPurpose { get; set; }
+
+
     public DbSet<UserRole> UserRole { get; set; }
     public DbSet<Building> Building { get; set; }
     public DbSet<Lead> Lead { get; set; }
 
-
-
-
-
-
     public DbSet<User> Users { get; set; }
     public DbSet<Tenant> Tenant { get; set; }
+    public DbSet<TenantFlatDetails> TenantFlatDetails { get; set; }
+
+
+
     public DbSet<Maintenance> Maintanance { get; set; }
     public DbSet<IssueType> IssueTypes { get; set; }
+    public DbSet<Frequency> Frequency { get; set; }
+
 
 
     public DbSet<Parking> Parking { get; set; }

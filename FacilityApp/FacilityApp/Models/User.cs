@@ -13,6 +13,11 @@ namespace FacilityApp.Models
         [Required]
         [DisplayName("Full Name ")]
         public string Name { get; set; }
+
+        [DisplayName("User Name ")]
+
+        public string UserName { get; set; }
+
         public string Password { get; set; }
 
         [DisplayName("Email ID ")]
@@ -20,17 +25,20 @@ namespace FacilityApp.Models
         public string? EmailID { get; set; }
         [DisplayName("MobileNumber ")]
         public string? MobileNo { get; set; }
-        [DisplayName("Designation ")]
-        public string?  Designation { get; set; }
+        [DisplayName("Tenant Name ")]
+        public int?  TenantId { get; set; }
 
+        [DisplayName("User Type ")]
         public int?  RoleId { get; set; }
+        [DisplayName("Building Name ")]
+        public int? BuildingId { get; set; }
 
         public RecordState Status { get; set; }
 
-        public string CreatedBy { get; set; } = "System";
+        public int CreatedBy { get; set; } = 1;
 
         public DateTime CreatedDate { get; set; } = DateTime.Now;
-        public string? UpdatedBy { get; set; }
+        public int? UpdatedBy { get; set; }
 
         public DateTime? UpdatedDate { get; set; }
 

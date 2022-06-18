@@ -1,6 +1,7 @@
 ﻿@model Lead
 @{
     Layout = "_Layout";
+    //string buttonText = Model==null? "Create" : "Edit";
 }
 
 <form method="post" asp-controller="Lead" asp-action="Create">
@@ -17,6 +18,7 @@
         <div class="  ">
             <div class="row ">
                 <h2 class="text-primary"> Lead Details</h2>
+                <input asp-for="LeadId" hidden/>
                 <hr />
             </div>
 
@@ -45,23 +47,41 @@
                 <div class="row ">
                     <div class="mb-3 col-sm-6">
                         <label asp-for="BuildingId"></label>
-           	<select  asp-for="BuildingId" class="form-control"  asp-items='@(new SelectList(@ViewBag.buildings,"BuildingId","Name"))'></select>
+                 	<select  asp-for="BuildingId" class="form-control"  asp-items='@(new SelectList(@ViewBag.buildings,"BuildingId","Name"))'></select>
                         <span asp-validation-for="BuildingId" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="row ">
+                   <div class="row ">
                     <div class="mb-3 col-sm-6">
-                        <label asp-for="LeadSource"></label>
-                        <input asp-for="LeadSource" class="form-control" />
-                        <span asp-validation-for="LeadSource" class="text-danger"></span>
+                        <label asp-for="VisitingPurposeId"></label>
+                 	<select  asp-for="VisitingPurposeId" class="form-control"  asp-items='@(new SelectList(@ViewBag.purpose,"VisitingPurposeId","Name"))'></select>
+                        <span asp-validation-for="VisitingPurposeId" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row ">
                     <div class="mb-3 col-sm-6">
-                        <label asp-for="LeadStatus"></label>
-                        <input asp-for="LeadStatus" class="form-control" />
-                        <span asp-validation-for="LeadStatus" class="text-danger"></span>
+                        <label asp-for="ContactPerson"></label>
+                        <input asp-for="ContactPerson" class="form-control" />
+                        <span asp-validation-for="ContactPerson" class="text-danger"></span>
                     </div>
+                </div>
+                 <div class="mb-3 col-sm-6">
+                        <label asp-for="ComingFrom"></label>
+                        <input asp-for="ComingFrom" class="form-control" />
+                        <span asp-validation-for="ComingFrom" class="text-danger"></span>
+                    </div></div>
+                <div class="row ">
+                    <div class="mb-3 col-sm-6">
+                        <label asp-for="CheckinTime"></label>
+                        <input asp-for="CheckinTime" class="form-control" />
+                        <span asp-validation-for="CheckinTime" class="text-danger"></span>
+                    </div></div>
+                        <div class="row ">
+                    <div class="mb-3 col-sm-6">
+                        <label asp-for="CheckoutTime"></label>
+                        <input asp-for="CheckoutTime" class="form-control" />
+                        <span asp-validation-for="CheckoutTime" class="text-danger"></span>
+                    </div></div>
                 </div>
                 	<button type="submit" class="btn btn-primary" style="width:150px">Create</button>
 		<a asp-controller="Lead" asp-action="Index" class="btn btn-secondary" style="width:150px">
@@ -69,7 +89,7 @@
 		</a>
             </div>
         </div>
-   
+    </div>
 </form>
 
 @section Scripts{

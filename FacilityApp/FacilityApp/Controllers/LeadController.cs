@@ -11,13 +11,18 @@ using FacilityApp.Models;
 
 namespace FacilityApp.Controllers
 {
-    public class LeadController : Controller
+    public class LeadController : FacilityBaseController
     {
+
+
         private readonly FacilityAppDbContext _db;
+
+
 
         public LeadController(FacilityAppDbContext db)
         {
             _db = db;
+
         }
         public IActionResult Index()
         {
@@ -31,15 +36,9 @@ namespace FacilityApp.Controllers
             var buildings = _db.Building.Select(x => new { x.BuildingId, x.Name }).ToList();
             buildings.Insert(0, new { BuildingId = 0, Name = "--Select--" });
             ViewBag.buildings = buildings;
-
-            //var flats = _db.Flat.Select(x => new { x.FlatId, x.FlatName }).ToList();
-            //flats.Insert(0, new { FlatId = 0, FlatName = "--Select--" });
-
-            //var parkings = _db.Parking.Select(x => new { x.ParkingId, x.ParkingName }).ToList();
-            //parkings.Insert(0, new { ParkingId = 0, ParkingName = "--Select--" });
-            //ViewBag.flats = flats;
-            //ViewBag.parkings = parkings;
-
+            var purpose = _db.VisitingPurpose.Select(x => new { x.VisitingPurposeId, x.Name }).ToList();
+            purpose.Insert(0, new { VisitingPurposeId = 0, Name = "--Select--" });
+            ViewBag.purpose = purpose;
             return View();
         }
 
@@ -53,9 +52,10 @@ namespace FacilityApp.Controllers
             //}
             if (ModelState.IsValid)
             {
-                var tenant = obj;
-                AddDetais(tenant);
-                _db.Lead.Add(tenant);
+                var record = obj;
+              //  obj.BuildingId = HttpContext.Session.GetInt32("BuilidngId");
+                AddDetais(record);
+                _db.Lead.Add(record);
 
                 _db.SaveChanges();
                 TempData["success"] = "Lead  created successfully";
@@ -64,12 +64,7 @@ namespace FacilityApp.Controllers
             return View(obj);
         }
 
-        private static dynamic AddDetais(dynamic obj)
-        {
-            obj.CreatedBy = "admin";
-            obj.CreatedDate = DateTime.Now;
-            return obj;
-        }
+   
         public IActionResult Edit(int? id)
         {
             if (id == null || id == 0)

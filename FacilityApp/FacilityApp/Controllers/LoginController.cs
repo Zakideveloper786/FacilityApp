@@ -4,13 +4,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FacilityApp.Controllers
 {
-    public class LoginController : Controller
+    public class LoginController : FacilityBaseController
     {
         private readonly FacilityAppDbContext _db;
+
+
 
         public LoginController(FacilityAppDbContext db)
         {
             _db = db;
+    
         }
 
         public IActionResult Index()
@@ -27,19 +30,24 @@ namespace FacilityApp.Controllers
             //{
             //    ModelState.AddModelError("name", "The DisplayOrder cannot exactly match the Name.");
             //}
-            if (ModelState.IsValid)
-            {
-                var exist =  _db.Users.Where(x => x.EmailID.ToLower() == obj.EmailID.ToLower() && x.Password==obj.Password).Any();
-                if (exist)
+            //if (ModelState.IsValid)
+            //{
+            var user = _db.Users.Where(x => x.MobileNo == obj.MobileNo && x.Password == obj.Password).FirstOrDefault();
+                if (user!=null)
                 {
                     TempData["success"] = "Login Successful";
-                    return RedirectToAction("index", "User");
+                HttpContext.Session.SetInt32("UserId", user.UserId);
+                HttpContext.Session.SetInt32("BuilidngId", user.BuildingId??0);
+
+                HttpContext.Session.SetString("UserName", user.Name);
+
+                return RedirectToAction("index", "User");
                 }
 
                 TempData["success"] = "Invalid Credentials";
                 return RedirectToAction("index", "Login");
 
-            }
+         //   }
             return View(obj);
         }
 

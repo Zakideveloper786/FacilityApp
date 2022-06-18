@@ -1,5 +1,5 @@
-﻿
-@model Tenant
+﻿@using FacilityApp.ViewModels
+@model TenantRegistration
 @{
 	Layout = "_Layout";
 }
@@ -14,84 +14,170 @@
                 });
             });
         </script>
-		<div class="container   p-5	">
+			<div class="container   p-5	">
 	<div class="  ">
 		<div class="row ">
 			<h2 class="text-primary"> Tenant Details</h2>
-			       <input asp-for="Password" value="" hidden/>
-
 			<hr />
 		</div>
 	
 		@*<div asp-validation-summary="All"></div>*@
 		<div class="row ">
-		<div class="mb-3 col-sm-6">
-			<label asp-for="Name"></label>
-			<input asp-for="Name" class="form-control" />
-			<span asp-validation-for="Name" class="text-danger"></span>
+		<div class="mb-3 col-sm col-md col-lg">
+			<label asp-for="Tenant.Name"></label>
+			<input asp-for="Tenant.Name" class="form-control" />
+			<span asp-validation-for="Tenant.Name" class="text-danger"></span>
+		</div>
+		<div class="mb-3 col-sm col-md col-lg">
+			<label asp-for="Tenant.MobileNo"></label>
+			<input asp-for="Tenant.MobileNo" class="form-control" />
+			<span asp-validation-for="Tenant.MobileNo" class="text-danger"></span>
+		</div>
+		@*<div class="mb-3">
+			<label asp-for="RoleId"></label>
+			<select  asp-for="RoleId" class="form-control"  asp-items='@(new SelectList(@ViewBag.Roles,"RoleId","RoleName"))'> </select>
+			<span asp-validation-for="EmailID" class="text-danger"></span>
+		</div>*@
+		<div class="mb-3 col-sm col-md col-lg">
+			<label asp-for="Tenant.EmiratedId"></label>
+			<input asp-for="Tenant.EmiratedId" class="form-control" />
+			<span asp-validation-for="Tenant.EmiratedId" class="text-danger"></span>
 		</div>
 		</div>
-		<div class="row ">
-		<div class="mb-3 col-sm-6">
-			<label asp-for="EmailId"></label>
-			<input asp-for="EmailId" class="form-control" />
-			<span asp-validation-for="EmailId" class="text-danger"></span>
+	<div class="row ">
+		<div class="mb-3 col-sm">
+			<label asp-for="Tenant.PassportNo"></label>
+			<input asp-for="Tenant.PassportNo" class="form-control" />
+			<span asp-validation-for="Tenant.PassportNo" class="text-danger"></span>
 		</div>
+		<div class="mb-3 col-sm">
+			<label asp-for="Tenant.EmailId"></label>
+			<input asp-for="Tenant.EmailId" class="form-control" />
+			<span asp-validation-for="Tenant.EmailId" class="text-danger"></span>
 		</div>
-				<div class="row ">
-		<div class="mb-3 col-sm-6">
-			<label asp-for="MobileNo"></label>
-			<input  asp-for="MobileNo" class="form-control"   />
-			<span asp-validation-for="MobileNo" class="text-danger"></span>
-		</div>
-	 
-		</div>
-		   <div class="row ">
-                    <div class="mb-3 col-sm-6">
-                        <label asp-for="BuildingId"></label>
-           	<select  asp-for="BuildingId" class="form-control"  asp-items='@(new SelectList(@ViewBag.buildings,"BuildingId","Name"))'></select>
-                        <span asp-validation-for="BuildingId" class="text-danger"></span>
-                    </div>
-				<div class="row ">
-		<div class="mb-3 col-sm-6">
-			<label asp-for="FlatNo"></label>
-			<input  asp-for="FlatNo" class="form-control" />
-			<span asp-validation-for="FlatNo" class="text-danger"></span>
-		</div>
-		</div>
-				<div class="row ">
-		<div class="mb-3 col-sm-6">
-			<label asp-for="FlatTypeId"></label>
-		           	<select  asp-for="FlatTypeId" class="form-control"  asp-items='@(new SelectList(@ViewBag.flattypes,"FlatTypeId","Name"))'></select>
-
-			<span asp-validation-for="FlatTypeId" class="text-danger"></span>
-		</div>
-		</div>
-				<div class="row ">
-		<div class="mb-3 col-sm-6">
-			<label asp-for="StartDate"></label>
-			<input  asp-for="StartDate" class="form-control" />
-			<span asp-validation-for="StartDate" class="text-danger"></span>
+		
+		@*<div class="mb-3">
+			<label asp-for="RoleId"></label>
+			<select  asp-for="RoleId" class="form-control"  asp-items='@(new SelectList(@ViewBag.Roles,"RoleId","RoleName"))'> </select>
+			<span asp-validation-for="EmailID" class="text-danger"></span>
+		</div>*@
+		<div class="mb-3 col-sm">
+			<label asp-for="Tenant.FamilyCount"></label>
+			<input asp-for="Tenant.FamilyCount" class="form-control" />
+			<span asp-validation-for="Tenant.FamilyCount" class="text-danger"></span>
 		</div>
 		</div>
 			<div class="row ">
 		<div class="mb-3 col-sm-6">
-			<label asp-for="EndDate"></label>
-			<input  asp-for="EndDate" class="form-control" />
+			<label asp-for="Tenant.Address"></label>
+			<textarea  asp-for="Tenant.Address" class="form-control"   rows="3" cols="40"></textarea>
+			<span asp-validation-for="Tenant.Address" class="text-danger"></span>
+		</div>
+		</div>
+		<div class="row ">
+			<h2 class="text-primary">Tenanant Flat Details</h2>
+			<hr />
+		</div>
+			<div class="row ">
+		<div class="mb-3 col-sm">
+				<label asp-for="TenantFlatDetails.BuildingId"></label>
+			<select  asp-for="TenantFlatDetails.BuildingId" class="form-control"  asp-items='@(new SelectList(@ViewBag.buildings,"BuildingId","Name"))'></select>
+			<span asp-validation-for="TenantFlatDetails.BuildingId" class="text-danger"></span>
+		
+		</div>
+		<div class="row ">
+		<div class="mb-3 col-sm">
+				<label asp-for="TenantFlatDetails.FlatId"></label>
+			<select  asp-for="TenantFlatDetails.FlatId" class="form-control"  asp-items='@(new SelectList(@ViewBag.Flats,"FlatId","FlatName"))'></select>
+			<span asp-validation-for="TenantFlatDetails.FlatId" class="text-danger"></span>
+		
+		</div>
+		<div class="mb-3 col-sm">
+				<label asp-for="TenantFlatDetails.FlatTypeId"></label>
+			<input asp-for="TenantFlatDetails.FlatTypeId" class="form-control" />
+			<span asp-validation-for="TenantFlatDetails.FlatTypeId" class="text-danger"></span>
+		</div>
+		@*<div class="mb-3">
+			<label asp-for="RoleId"></label>
+			<select  asp-for="RoleId" class="form-control"  asp-items='@(new SelectList(@ViewBag.Roles,"RoleId","RoleName"))'> </select>
+			<span asp-validation-for="EmailID" class="text-danger"></span>
+		</div>*@
+		<div class="mb-3 col-sm">
+			<label asp-for="TenantFlatDetails.IsParking"></label>
+			<input asp-for="TenantFlatDetails.IsParking"  type="radio"  value="false" class="form-check form-check-input bg-black"/>
+			<span asp-validation-for="TenantFlatDetails.IsParking" class="text-danger"></span>
+		</div>
+		</div>
+	<div class="row ">
+		<div class="mb-3 col-sm">
+			<label asp-for=""></label>
+
+			<input id="TenantFlatDetails_StartDate" class="form-control ffa fa-calendar fcdatepicker" />
+			<span asp-validation-for="StartDate" class="text-danger"></span>
+		</div>
+		<div class="mb-3 col-sm">
+		<label asp-for="EndDate"></label>
+		
+			<input id="TenantFlatDetails_EndDate" class="form-control ffa fa-calendar fcdatepicker" />
 			<span asp-validation-for="EndDate" class="text-danger"></span>
 		</div>
+		@*<div class="mb-3">
+			<label asp-for="RoleId"></label>
+			<select  asp-for="RoleId" class="form-control"  asp-items='@(new SelectList(@ViewBag.Roles,"RoleId","RoleName"))'> </select>
+			<span asp-validation-for="EmailID" class="text-danger"></span>
+		</div>*@
+		<div class="mb-3 col-sm">
+			<label asp-for="TenantFlatDetails.RenewalDate"></label>
+			<input id="TenantFlatDetails_RenewalDate" class="form-control ffa fa-calendar fcdatepicker" />
+
+			<span asp-validation-for="TenantFlatDetails.RenewalDate" class="text-danger"></span>
 		</div>
-			<div class="row  " >
-				<div class="container-fluid p-3 justify-content-center align-content-center">
-			<button type="submit" class="btn btn-primary  " style="width:150px">Create</button>
-		<a asp-controller="Tenant" asp-action="Index" class="btn btn-secondary" style="width:150px" >
+		</div>
+		<div class="row ">
+			<h2 class="text-primary"> Tenant Rent Details</h2>
+			<hr />
+		</div>
+		<div class="row ">
+		<div class="mb-3 col-sm">
+			<label asp-for="TenantFlatDetails.RentAmount"></label>
+			<input asp-for="TenantFlatDetails.RentAmount" class="form-control" />
+			<span asp-validation-for="TenantFlatDetails.RentAmount" class="text-danger"></span>
+		</div>
+		<div class="mb-3 col-sm">
+				<label asp-for="TenantFlatDetails.MaintananceCost"></label>
+			<input asp-for="TenantFlatDetails.MaintananceCost" class="form-control" />
+			<span asp-validation-for="TenantFlatDetails.MaintananceCost" class="text-danger"></span>
+		</div>
+		@*<div class="mb-3">
+			<label asp-for="RoleId"></label>
+			<select  asp-for="RoleId" class="form-control"  asp-items='@(new SelectList(@ViewBag.Roles,"RoleId","RoleName"))'> </select>
+			<span asp-validation-for="EmailID" class="text-danger"></span>
+		</div>*@
+		<div class="mb-3 col-sm">
+				<label asp-for="TenantFlatDetails.ParkingAmount"></label>
+			<input asp-for="TenantFlatDetails.ParkingAmount" class="form-control" />
+			<span asp-validation-for="TenantFlatDetails.ParkingAmount" class="text-danger"></span>
+		</div>
+		</div>
+		
+		<div class="row ">
+		<div class="mb-3 col-sm-4">
+			<label asp-for="TenantFlatDetails.FrequencyId"></label>
+			<input asp-for="TenantFlatDetails.FrequencyId" class="form-control" />
+			<span asp-validation-for="TenantFlatDetails.FrequencyId" class="text-danger"></span>
+		</div>
+		<div class="mb-3 col-sm-4">
+				<label asp-for="TenantFlatDetails.AmountToPay"></label>
+			<input asp-for="TenantFlatDetails.AmountToPay" class="form-control" />
+			<span asp-validation-for="TenantFlatDetails.AmountToPay" class="text-danger"></span>
+		</div>
+		</div>
+		<button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+		<a asp-controller="Category" asp-action="Index" class="btn btn-secondary" style="width:150px">
 			Back to List
 		</a>
-		</div>
-		</div>
-		</div>
-		</div>
-		</div>
+	</div>
+	</div>
 </form>
 
 @section Scripts{

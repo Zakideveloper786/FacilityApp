@@ -7,10 +7,11 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 using System;
+using FacilityApp.ViewModels;
 
 namespace FacilityApp.Controllers
 {
-    public class BuildingController : Controller
+    public class BuildingController : FacilityBaseController
     {
         private readonly FacilityAppDbContext _db;
 
@@ -20,8 +21,11 @@ namespace FacilityApp.Controllers
         }
         public IActionResult Index()
         {
-           // throw new Exception("error");
-            IEnumerable<Building> list = _db.Building;
+            // throw new Exception("error");
+            IEnumerable<BuildingVM> list = (from b in _db.Building join u in _db.Users on b.UserId equals u.UserId
+
+                                          select new BuildingVM { BuildingId = b.BuildingId, Name = b.Name, UserName = u.UserName }).ToList();
+         
             return View(list);
         }
         //GET
@@ -29,13 +33,16 @@ namespace FacilityApp.Controllers
         {
             var roles = _db.UserRole.Select(x => new { x.RoleId, x.RoleName }).ToList();
             roles.Insert(0, new{ RoleId= 0, RoleName= "--Select--" }          );
+            var users = _db.Users.Where(x=>x.RoleId==2).Select(x => new { x.UserId, x.UserName }).ToList();
+            users.Insert(0, new { UserId = 0, UserName = "--Select--" });
+            ViewBag.Roles = roles;
+            ViewBag.users = users;
 
             //var flats = _db.Flat.Select(x => new { x.FlatId, x.FlatName }).ToList();
             //flats.Insert(0, new { FlatId = 0, FlatName = "--Select--" });
 
             //var parkings = _db.Parking.Select(x => new { x.ParkingId, x.ParkingName }).ToList();
             //parkings.Insert(0, new { ParkingId = 0, ParkingName = "--Select--" });
-            ViewBag.Roles = roles;
             //ViewBag.flats = flats;
             //ViewBag.parkings = parkings;
 
@@ -63,12 +70,12 @@ namespace FacilityApp.Controllers
             return View(obj);
         }
 
-        private static dynamic AddDetais(dynamic obj)
-        {
-            obj.CreatedBy = "admin";
-            obj.CreatedDate = DateTime.Now;
-            return obj;
-        }
+        //private  dynamic AddDetais(dynamic obj)
+        //{
+        //    obj.CreatedBy = (int)HttpContext.Session.GetInt32("UserId"); ;
+        //    obj.CreatedDate = DateTime.Now;
+        //    return obj;
+        //}
         public IActionResult Edit(int? id)
         {
             if (id == null || id == 0)

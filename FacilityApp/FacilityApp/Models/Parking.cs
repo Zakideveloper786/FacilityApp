@@ -28,10 +28,10 @@ namespace FacilityApp.Models
         public RecordState Status { get; set; }
 
 
-        public string CreatedBy { get; set; } = "System";
+        public int CreatedBy { get; set; } = 1;
 
         public DateTime CreatedDate { get; set; } = DateTime.Now;
-        public string? UpdatedBy { get; set; } 
+        public int? UpdatedBy { get; set; } 
 
         public DateTime? UpdatedDate { get; set; } 
 
