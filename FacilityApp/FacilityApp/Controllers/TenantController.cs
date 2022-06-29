@@ -12,7 +12,7 @@ using FacilityApp.ViewModels;
 
 namespace FacilityApp.Controllers
 {
-    public class TenantController : Controller
+    public class TenantController : FacilityBaseController
     {
         private readonly FacilityAppDbContext _db;
 
@@ -36,12 +36,15 @@ namespace FacilityApp.Controllers
             var buildings = _db.Building.Select(x => new { x.BuildingId, x.Name }).ToList();
             buildings.Insert(0, new { BuildingId = 0, Name = "--Select--" });
             ViewBag.buildings = buildings;
-            //var flats = _db.Flat.Select(x => new { x.FlatId, x.FlatName }).ToList();
-            //flats.Insert(0, new { FlatId = 0, FlatName = "--Select--" });
-
+            var flats = _db.Flat.Select(x => new { x.FlatId, x.Name }).ToList();
+            flats.Insert(0, new { FlatId = 0, Name = "--Select--" });
+            ViewBag.flats = flats;
+            var frequency = _db.Frequency.Select(x => new { x.FrequencyId, x.Name }).ToList();
+            frequency.Insert(0, new { FrequencyId = 0, Name = "--Select--" });
+            ViewBag.frequency = frequency;
             //var parkings = _db.Parking.Select(x => new { x.ParkingId, x.ParkingName }).ToList();
             //parkings.Insert(0, new { ParkingId = 0, ParkingName = "--Select--" });
-            //ViewBag.flats = flats;
+
             //ViewBag.parkings = parkings;
 
             return View();
@@ -56,29 +59,45 @@ namespace FacilityApp.Controllers
             //    ModelState.AddModelError("name", "The DisplayOrder cannot exactly match the Name.");
             //}
            
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 var tenant = obj.Tenant;
                 AddDetais(tenant);
                 _db.Tenant.Add(tenant);
-                var details = obj.TenantFlatDetails;
+            _db.SaveChanges();
+            var details = obj.TenantFlatDetails;
                 details.TenantId = tenant.TenantId;
-                _db.TenantFlatDetails.Add(details);
-                AddDetais(details);
+            AddDetais(details);
+            _db.TenantFlatDetails.Add(details);
 
                 _db.SaveChanges();
+ 
+
+            if(tenant.FaciltyAppAccess==true)
+            {
+                var flatName = _db.Flat.Where(x => x.FlatId == details.FlatId).Select(x => x.Name).FirstOrDefault();
+                var buildingCode = _db.Building.Where(x => x.BuildingId == details.BuildingId).Select(x => x.BuildingCode).FirstOrDefault();
+                TenantUser tuser = new TenantUser();
+                tuser.BuildingId = details.BuildingId;
+                tuser.UserName = buildingCode+"-"+ flatName;
+                tuser.Password = "password";
+                AddDetais(tuser);
+                _db.tenantUsers.Add(tuser);
+                _db.SaveChanges();
+
+            }
                 TempData["success"] = "Tenant  created successfully";
                 return RedirectToAction("Index");
-            }
+            //}
             return View(obj);
         }
 
-        private static dynamic AddDetais(dynamic obj)
-        {
-            obj.CreatedBy = "admin";
-            obj.CreatedDate = DateTime.Now;
-            return obj;
-        }
+        //private static dynamic AddDetais(dynamic obj)
+        //{
+        //    obj.CreatedBy = "admin";
+        //    obj.CreatedDate = DateTime.Now;
+        //    return obj;
+        //}
 
         //POST
         [HttpPost]

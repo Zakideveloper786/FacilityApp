@@ -1,5 +1,5 @@
 ﻿@using FacilityApp.ViewModels;
-@model IEnumerable<BuildingVM>
+@model IEnumerable<Building>
 @{
     ViewData["Title"] = "User Registration";
    
@@ -59,7 +59,7 @@ $(document).ready(function () {
                     @obj.Name
 				</td>
                 <td width="25%">
-                    @obj.UserName
+                    @obj.ContactPerson
 				</td>
                @* <td width="25%">
                     @obj.EmailId

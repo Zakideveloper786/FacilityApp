@@ -13,10 +13,8 @@ namespace FacilityApp.Models
         [Required]
         [DisplayName("Buliding / Apartment Name")]
 
-        public int BuildingId { get; set; }
+        public int? BuildingId { get; set; }
 
-
-        [Required]
         [DisplayName("Location ")]
 
         public string? Location { get; set; }
@@ -80,11 +78,11 @@ namespace FacilityApp.Models
         [DisplayName("SEWA No")]
         public string? SEWANo { get; set; }
         [DisplayName("Parking Slot Floor")]
-        public string ParkingSlotFloor { get; set; }
+        public string? ParkingSlotFloor { get; set; }
         [DisplayName("Parking Slot No")]
-        public string ParkingSlotNo { get; set; }
+        public string? ParkingSlotNo { get; set; }
         [DisplayName("Parking Key Provided")]
-        public bool ParkingKeyProvided { get; set; }
+        public bool? ParkingKeyProvided { get; set; }
 
 
         public int? CreatedBy { get; set; } = 1;

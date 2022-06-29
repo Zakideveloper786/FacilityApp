@@ -33,6 +33,8 @@ public class FacilityAppDbContext :DbContext
     public DbSet<Lead> Lead { get; set; }
 
     public DbSet<User> Users { get; set; }
+    public DbSet<TenantUser> tenantUsers { get; set; }
+
     public DbSet<Tenant> Tenant { get; set; }
     public DbSet<TenantFlatDetails> TenantFlatDetails { get; set; }
 

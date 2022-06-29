@@ -20,8 +20,17 @@
   <ItemGroup>
     <Content Remove="Views\Building\Delete.cshtml" />
     <Content Remove="Views\Building\Edit.cshtml" />
+    <Content Remove="Views\Maintenance\Delete.cshtml" />
+    <Content Remove="Views\Maintenance\Edit.cshtml" />
     <Content Remove="Views\User\Delete.cshtml" />
     <Content Remove="Views\User\Edit.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Views\Tenant\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +40,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.6" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,8 +51,10 @@
   <ItemGroup>
     <None Include="Views\Building\Create.cshtml" />
     <None Include="Views\Building\Index.cshtml" />
-    <None Include="Views\Tenant\Create.cshtml" />
-    <None Include="Views\Tenant\Index.cshtml" />
+    <Content Include="Views\Tenant\Create.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

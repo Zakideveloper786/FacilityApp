@@ -12,8 +12,10 @@ namespace FacilityApp.Models
         public int BuildingId { get; set; }
         [DisplayName("Building Name")]
         public string Name { get; set; }
+        [DisplayName("Building Code")]
+        public string? BuildingCode { get; set; }
         [DisplayName("Contact Person   ")]
-        public int? UserId { get; set; }
+        public string? ContactPerson { get; set; }
         [DisplayName("Email ID")]
         public string? EmailId { get; set; }
         [DisplayName("Address")]

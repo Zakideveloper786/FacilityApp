@@ -50,8 +50,8 @@ namespace FacilityApp.Controllers
             //{
             //    ModelState.AddModelError("name", "The DisplayOrder cannot exactly match the Name.");
             //}
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 var record = obj;
               //  obj.BuildingId = HttpContext.Session.GetInt32("BuilidngId");
                 AddDetais(record);
@@ -60,7 +60,7 @@ namespace FacilityApp.Controllers
                 _db.SaveChanges();
                 TempData["success"] = "Lead  created successfully";
                 return RedirectToAction("Index");
-            }
+            //}
             return View(obj);
         }
 

@@ -22,15 +22,17 @@ namespace FacilityApp.Controllers
         public IActionResult Index()
         {
             // throw new Exception("error");
-            IEnumerable<BuildingVM> list = (from b in _db.Building join u in _db.Users on b.UserId equals u.UserId
+            //IEnumerable<BuildingVM> list = (from b in _db.Building join u in _db.Users on b.UserId equals u.UserId
 
-                                          select new BuildingVM { BuildingId = b.BuildingId, Name = b.Name, UserName = u.UserName }).ToList();
-         
-            return View(list);
+            //                              select new BuildingVM { BuildingId = b.BuildingId, Name = b.Name, UserName = u.UserName }).ToList();
+
+            IEnumerable<Building> liist = _db.Building.ToList();
+            return View(liist);
         }
         //GET
         public IActionResult Create()
         {
+
             var roles = _db.UserRole.Select(x => new { x.RoleId, x.RoleName }).ToList();
             roles.Insert(0, new{ RoleId= 0, RoleName= "--Select--" }          );
             var users = _db.Users.Where(x=>x.RoleId==2).Select(x => new { x.UserId, x.UserName }).ToList();

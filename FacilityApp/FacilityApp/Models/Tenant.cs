@@ -14,21 +14,22 @@ namespace FacilityApp.Models
         [DisplayName("Mobile No")]
         public string MobileNo { get; set; }
         [DisplayName("Email ID")]
-        public string EmailId { get; set; }
+        public string? EmailId { get; set; }
         [DisplayName("Address")]
-        public string Address { get; set; }
+        public string? Address { get; set; }
         [DisplayName("Emirates ID")]
-        public string EmiratedId { get; set; }
+        public string? EmiratedId { get; set; }
         [DisplayName("PassPort No")]
-        public string PassportNo { get; set; }
+        public string? PassportNo { get; set; }
         [DisplayName("No of Family Members")]
-        public int FamilyCount { get; set; }
-
+        public int? FamilyCount { get; set; }
+        [DisplayName("Facility App Required")]
+        public bool? FaciltyAppAccess { get; set; }
 
 
         // Flat
 
-        
+
 
         // Payment details
 

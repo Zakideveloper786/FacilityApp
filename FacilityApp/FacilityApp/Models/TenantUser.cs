@@ -1,16 +1,20 @@
-﻿
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using static FacilityApp.Core.Statics;
 
 namespace FacilityApp.Models
 {
-    public class Flat
+    public class TenantUser
     {
+      
         [Key]
-        public int FlatId { get; set; }
-        public string Name { get; set; }
+        public int TenantUserId { get; set; }
+        
+
+        public string UserName { get; set; }
+
+        public string Password { get; set; }
 
         public int? BuildingId { get; set; }
 
@@ -19,7 +23,9 @@ namespace FacilityApp.Models
         public int CreatedBy { get; set; } = 1;
 
         public DateTime CreatedDate { get; set; } = DateTime.Now;
-       
+        public int? UpdatedBy { get; set; }
+
+        public DateTime? UpdatedDate { get; set; }
 
     }
 }

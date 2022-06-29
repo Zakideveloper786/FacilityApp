@@ -31,9 +31,18 @@
 		</div>
 		<div class="row ">
 		<div class="mb-3 col-sm-6">
-			<label asp-for="UserId"></label>
-@*			<input asp-for="UserId" class="form-control" />*@
-				<select  asp-for="UserId" class="form-control"  asp-items='@(new SelectList(@ViewBag.users,"UserId","UserName"))'> </select>
+			<label asp-for="BuildingCode"></label>
+			<input asp-for="BuildingCode" class="form-control" />
+			<span asp-validation-for="BuildingCode" class="text-danger"></span>
+		</div>
+		</div>
+		<div class="row ">
+		<div class="mb-3 col-sm-6">
+			<label asp-for="ContactPerson"></label>
+			<input asp-for="ContactPerson" class="form-control" />
+			<span asp-validation-for="ContactPerson" class="text-danger"></span>
+
+				@*<select  asp-for="UserId" class="form-control"  asp-items='@(new SelectList(@ViewBag.users,"UserId","UserName"))'> </select>*@
 		</div>
 		@*<div class="mb-3">
 			<label asp-for="RoleId"></label>

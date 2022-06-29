@@ -4,6 +4,7 @@ using FacilityApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FacilityApp.Migrations
 {
     [DbContext(typeof(FacilityAppDbContext))]
-    partial class FacilityAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220618140317_202220618")]
+    partial class _202220618
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,14 +34,6 @@ namespace FacilityApp.Migrations
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("BuildingCode")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("ContactPerson")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
@@ -66,6 +60,9 @@ namespace FacilityApp.Migrations
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("BuildingId");
 
@@ -388,6 +385,7 @@ namespace FacilityApp.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TenantId"), 1L, 1);
 
                     b.Property<string>("Address")
+                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
@@ -398,17 +396,16 @@ namespace FacilityApp.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("EmailId")
+                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("EmiratedId")
+                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<bool?>("FaciltyAppAccess")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("FamilyCount")
+                    b.Property<int>("FamilyCount")
                         .HasColumnType("int");
 
                     b.Property<string>("MobileNo")
@@ -422,6 +419,7 @@ namespace FacilityApp.Migrations
                         .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("PassportNo")
+                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
@@ -447,8 +445,7 @@ namespace FacilityApp.Migrations
                     b.Property<decimal?>("AmountToPay")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("BuildingId")
-                        .IsRequired()
+                    b.Property<int>("BuildingId")
                         .HasColumnType("int");
 
                     b.Property<int?>("CreatedBy")
@@ -470,6 +467,7 @@ namespace FacilityApp.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Location")
+                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
@@ -527,47 +525,6 @@ namespace FacilityApp.Migrations
                     b.HasKey("TenantFlatDetailsId");
 
                     b.ToTable("TenantFlatDetails");
-                });
-
-            modelBuilder.Entity("FacilityApp.Models.TenantUser", b =>
-                {
-                    b.Property<int>("TenantUserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TenantUserId"), 1L, 1);
-
-                    b.Property<int?>("BuildingId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<byte>("Status")
-                        .HasColumnType("tinyint");
-
-                    b.Property<int?>("UpdatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.HasKey("TenantUserId");
-
-                    b.ToTable("tenantUsers");
                 });
 
             modelBuilder.Entity("FacilityApp.Models.User", b =>

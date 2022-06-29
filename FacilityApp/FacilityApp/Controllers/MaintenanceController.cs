@@ -11,7 +11,7 @@ using FacilityApp.ViewModels;
 
 namespace FacilityApp.Controllers
 {
-    public class MaintenanceController : Controller
+    public class MaintenanceController : FacilityBaseController
     {
         private readonly FacilityAppDbContext _db;
 
@@ -79,6 +79,7 @@ namespace FacilityApp.Controllers
             {
                  var record= obj;
                 AddDetais(record);
+
                 _db.Maintanance.Add(record);
             
                 _db.SaveChanges();
@@ -88,12 +89,12 @@ namespace FacilityApp.Controllers
             return View(obj);
         }
 
-        private static dynamic AddDetais(dynamic obj)
-        {
-            obj.CreatedBy = "admin";
-            obj.CreatedDate = DateTime.Now;
-            return obj;
-        }
+        //private static dynamic AddDetais(dynamic obj)
+        //{
+        //    obj.CreatedBy = "admin";
+        //    obj.CreatedDate = DateTime.Now;
+        //    return obj;
+        //}
         public IActionResult Edit(int? id)
         {
             if (id == null || id == 0)

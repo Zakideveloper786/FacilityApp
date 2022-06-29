@@ -5,17 +5,8 @@
 }
 
 <form method="post" asp-controller="Tenant" asp-action="Create"> 
-	 <script type="text/javascript">
-            $(document).ready(function () {
-                $('.fcdatepicker').datepicker({
-                    changeMonth: true,
-                    changeYear: true,
-                    format: "dd/mm/yyyy",
-                });
-            });
-        </script>
-			<div class="container   p-5	">
-	<div class="  ">
+	 
+	
 		<div class="row ">
 			<h2 class="text-primary"> Tenant Details</h2>
 			<hr />
@@ -32,12 +23,7 @@
 			<label asp-for="Tenant.MobileNo"></label>
 			<input asp-for="Tenant.MobileNo" class="form-control" />
 			<span asp-validation-for="Tenant.MobileNo" class="text-danger"></span>
-		</div>
-		@*<div class="mb-3">
-			<label asp-for="RoleId"></label>
-			<select  asp-for="RoleId" class="form-control"  asp-items='@(new SelectList(@ViewBag.Roles,"RoleId","RoleName"))'> </select>
-			<span asp-validation-for="EmailID" class="text-danger"></span>
-		</div>*@
+		</div>	
 		<div class="mb-3 col-sm col-md col-lg">
 			<label asp-for="Tenant.EmiratedId"></label>
 			<input asp-for="Tenant.EmiratedId" class="form-control" />
@@ -68,18 +54,36 @@
 		</div>
 		</div>
 			<div class="row ">
-		<div class="mb-3 col-sm-6">
+		<div class="mb-3 col-sm">
 			<label asp-for="Tenant.Address"></label>
 			<textarea  asp-for="Tenant.Address" class="form-control"   rows="3" cols="40"></textarea>
 			<span asp-validation-for="Tenant.Address" class="text-danger"></span>
 		</div>
+		<div class="mb-3 col-sm">
+			<label asp-for="Tenant.FaciltyAppAccess"></label>
+			            <div class="mt-2">
+
+			 <div class="form-check form-check-inline">
+                    <input class="form-check-input" id="AffectsUsersYes" asp-for="Tenant.FaciltyAppAccess" type="radio" value="true"  class="form-check form-check-input bg-black"/>
+                    <label class="form-check-label" for="AffectsUsersYes">Yes</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" id="AffectsUsersNo" asp-for="Tenant.FaciltyAppAccess" type="radio" value="false"  class="form-check form-check-input bg-black"/>
+                    <label class="form-check-label" for="AffectsUsersNo">No</label>
+                </div>
+			<span asp-validation-for="Tenant.FaciltyAppAccess" class="text-danger"></span>
+
+			</div>
+			</div>
+		</div>
+		<div class="mb-3 col-sm">
 		</div>
 		<div class="row ">
 			<h2 class="text-primary">Tenanant Flat Details</h2>
 			<hr />
 		</div>
 			<div class="row ">
-		<div class="mb-3 col-sm">
+		<div class="mb-3 col-sm-6">
 				<label asp-for="TenantFlatDetails.BuildingId"></label>
 			<select  asp-for="TenantFlatDetails.BuildingId" class="form-control"  asp-items='@(new SelectList(@ViewBag.buildings,"BuildingId","Name"))'></select>
 			<span asp-validation-for="TenantFlatDetails.BuildingId" class="text-danger"></span>
@@ -88,13 +92,14 @@
 		<div class="row ">
 		<div class="mb-3 col-sm">
 				<label asp-for="TenantFlatDetails.FlatId"></label>
-			<select  asp-for="TenantFlatDetails.FlatId" class="form-control"  asp-items='@(new SelectList(@ViewBag.Flats,"FlatId","FlatName"))'></select>
+			<select  asp-for="TenantFlatDetails.FlatId" class="form-control"  asp-items='@(new SelectList(@ViewBag.flats,"FlatId","Name"))'></select>
 			<span asp-validation-for="TenantFlatDetails.FlatId" class="text-danger"></span>
 		
 		</div>
 		<div class="mb-3 col-sm">
 				<label asp-for="TenantFlatDetails.FlatTypeId"></label>
-			<input asp-for="TenantFlatDetails.FlatTypeId" class="form-control" />
+					<select  asp-for="TenantFlatDetails.FlatTypeId" class="form-control"  asp-items='@(new SelectList(@ViewBag.flattypes,"FlatTypeId","Name"))'></select>
+
 			<span asp-validation-for="TenantFlatDetails.FlatTypeId" class="text-danger"></span>
 		</div>
 		@*<div class="mb-3">
@@ -104,22 +109,31 @@
 		</div>*@
 		<div class="mb-3 col-sm">
 			<label asp-for="TenantFlatDetails.IsParking"></label>
-			<input asp-for="TenantFlatDetails.IsParking"  type="radio"  value="false" class="form-check form-check-input bg-black"/>
+			  <div class="mt-2">
+
+			 <div class="form-check form-check-inline">
+                    <input class="form-check-input" id="IsParkingYes" asp-for="TenantFlatDetails.IsParking" type="radio" value="true"  class="form-check form-check-input bg-black"/>
+                    <label class="form-check-label" for="IsParkingYes">Yes</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" id="IsParkingNo" asp-for="TenantFlatDetails.IsParking" type="radio" value="false"  class="form-check form-check-input bg-black"/>
+                    <label class="form-check-label" for="IsParkingNo">No</label>
+                </div>
 			<span asp-validation-for="TenantFlatDetails.IsParking" class="text-danger"></span>
 		</div>
 		</div>
 	<div class="row ">
 		<div class="mb-3 col-sm">
-			<label asp-for=""></label>
+			<label asp-for="TenantFlatDetails.TenancyStartDate"></label>
 
-			<input id="TenantFlatDetails_StartDate" class="form-control ffa fa-calendar fcdatepicker" />
-			<span asp-validation-for="StartDate" class="text-danger"></span>
+			<input id="TenantFlatDetails.TenancyStartDate" class="form-control ffa fa-calendar fcdatepicker" />
+			<span asp-validation-for="TenantFlatDetails.TenancyStartDate" class="text-danger"></span>
 		</div>
 		<div class="mb-3 col-sm">
-		<label asp-for="EndDate"></label>
+		<label asp-for="TenantFlatDetails.TenancyEndDate"></label>
 		
-			<input id="TenantFlatDetails_EndDate" class="form-control ffa fa-calendar fcdatepicker" />
-			<span asp-validation-for="EndDate" class="text-danger"></span>
+			<input id="TenantFlatDetails.TenancyEndDate" class="form-control ffa fa-calendar fcdatepicker" />
+			<span asp-validation-for="TenantFlatDetails.TenancyEndDate" class="text-danger"></span>
 		</div>
 		@*<div class="mb-3">
 			<label asp-for="RoleId"></label>
@@ -128,7 +142,7 @@
 		</div>*@
 		<div class="mb-3 col-sm">
 			<label asp-for="TenantFlatDetails.RenewalDate"></label>
-			<input id="TenantFlatDetails_RenewalDate" class="form-control ffa fa-calendar fcdatepicker" />
+			<input id="TenantFlatDetails.RenewalDate" class="form-control ffa fa-calendar fcdatepicker" />
 
 			<span asp-validation-for="TenantFlatDetails.RenewalDate" class="text-danger"></span>
 		</div>
@@ -163,7 +177,8 @@
 		<div class="row ">
 		<div class="mb-3 col-sm-4">
 			<label asp-for="TenantFlatDetails.FrequencyId"></label>
-			<input asp-for="TenantFlatDetails.FrequencyId" class="form-control" />
+					<select  asp-for="TenantFlatDetails.FrequencyId" class="form-control"  asp-items='@(new SelectList(@ViewBag.frequency,"FrequencyId","Name"))'></select>
+
 			<span asp-validation-for="TenantFlatDetails.FrequencyId" class="text-danger"></span>
 		</div>
 		<div class="mb-3 col-sm-4">
@@ -176,14 +191,22 @@
 		<a asp-controller="Category" asp-action="Index" class="btn btn-secondary" style="width:150px">
 			Back to List
 		</a>
-	</div>
-	</div>
+	
 </form>
 
 @section Scripts{
 	@{
 		<partial name="_ValidationScriptsPartial" />
 	}
-
+	 
+ <script type="text/javascript">
+            $(document).ready(function () {
+                $('.fcdatepicker').datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    format: "dd/mm/yyyy",
+                });
+            });
+        </script>
 }
 
