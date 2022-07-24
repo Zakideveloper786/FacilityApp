@@ -823,3 +823,4 @@ D:\Zaki-Dev\FacilityApp\FacilityApp\FacilityApp\bin\Debug\net6.0\runtimes\win\li
 D:\Zaki-Dev\FacilityApp\FacilityApp\FacilityApp\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 D:\Zaki-Dev\FacilityApp\FacilityApp\FacilityApp\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 D:\Zaki-Dev\FacilityApp\FacilityApp\FacilityApp\obj\Debug\net6.0\FacilityApp.MvcApplicationPartsAssemblyInfo.cs
+D:\Zaki-Dev\FacilityApp\FacilityApp\FacilityApp\bin\Debug\net6.0\BCrypt.Net-Next.dll

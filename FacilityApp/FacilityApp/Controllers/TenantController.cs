@@ -9,6 +9,8 @@ using FacilityApp.Data;
 
 using FacilityApp.Models;
 using FacilityApp.ViewModels;
+using System.Net.Mail;
+using System.Net;
 
 namespace FacilityApp.Controllers
 {
@@ -84,7 +86,8 @@ namespace FacilityApp.Controllers
                 AddDetais(tuser);
                 _db.tenantUsers.Add(tuser);
                 _db.SaveChanges();
-
+                if (!string.IsNullOrWhiteSpace(tenant.EmailId))
+                    sendEmail(tenant.EmailId, tuser.UserName);
             }
                 TempData["success"] = "Tenant  created successfully";
                 return RedirectToAction("Index");
@@ -92,6 +95,35 @@ namespace FacilityApp.Controllers
             return View(obj);
         }
 
+        private bool sendEmail(string email, string username)
+        {
+            string emailid = "zaki.developer786@gmail.com";
+
+            using (MailMessage mm = new MailMessage(email, email))
+            {
+                mm.Subject = $"Welcome to Facility App";
+                mm.Body = $"Hello Tenant, <br/> Your Username is : {username} and Password is : <b>facility123</b> <br/><br/>Thank you,<br/><br/>Facility App Team";
+                //if (model.Attachment.Length > 0)
+                //{
+                //    string fileName = Path.GetFileName(model.Attachment.FileName);
+                //    mm.Attachments.Add(new Attachment(model.Attachment.OpenReadStream(), fileName));
+                //}
+                mm.IsBodyHtml = true;
+                using (SmtpClient smtp = new SmtpClient())
+                {
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.EnableSsl = true;
+                    NetworkCredential NetworkCred = new NetworkCredential(emailid, "qszspkfqzdbfaqdj");
+                    smtp.UseDefaultCredentials = false;
+                    smtp.Credentials = NetworkCred;
+                    smtp.Port = 587;
+                    smtp.Send(mm);
+
+                }
+                return true;
+
+            }
+        }
         //private static dynamic AddDetais(dynamic obj)
         //{
         //    obj.CreatedBy = "admin";

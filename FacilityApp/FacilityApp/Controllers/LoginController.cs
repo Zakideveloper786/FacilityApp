@@ -32,8 +32,8 @@ namespace FacilityApp.Controllers
             //}
             //if (ModelState.IsValid)
             //{
-            var user = _db.Users.Where(x => x.MobileNo == obj.MobileNo && x.Password == obj.Password).FirstOrDefault();
-                if (user!=null)
+            var user = _db.Users.Where(x => x.MobileNo == obj.MobileNo).FirstOrDefault();
+                if (user!=null && BCrypt.Net.BCrypt.Verify(obj.Password , user.Password) )
                 {
                     TempData["success"] = "Login Successful";
                 HttpContext.Session.SetInt32("UserId", user.UserId);

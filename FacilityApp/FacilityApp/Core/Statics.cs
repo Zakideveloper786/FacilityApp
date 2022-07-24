@@ -16,5 +16,7 @@
             Paid = 1
   
         }
+
+        public static int Userid { get; set; }
     }
 }

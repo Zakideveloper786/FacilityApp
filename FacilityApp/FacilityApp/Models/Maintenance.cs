@@ -22,6 +22,8 @@ namespace FacilityApp.Models
         public string IssueDetails { get; set; }
         [DisplayName("Assigned To")]
         public int? UserId { get; set; }
+        [DisplayName("Flat Id")]
+        public int? FlatId { get; set; }
 
         [DisplayName("Request Status")]
         public int?  RequestStatusId { get; set; }

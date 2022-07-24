@@ -56,7 +56,10 @@ namespace FacilityApp.Controllers
             //{
                  var tenant= obj;
                 AddDetais(tenant);
-                _db.Users.Add(tenant);
+
+            var password = BCrypt.Net.BCrypt.HashPassword(tenant.Password);
+            tenant.Password = password;
+            _db.Users.Add(tenant);
                 
                 _db.SaveChanges();
                 TempData["success"] = "User  created successfully";
