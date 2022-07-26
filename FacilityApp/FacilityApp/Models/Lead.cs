@@ -12,7 +12,7 @@ namespace FacilityApp.Models
         public int LeadId { get; set; }
         [DisplayName("BuildingName")]
         public int? BuildingId { get; set; }
-        [DisplayName("Lead Name")]
+        [DisplayName("Visitor Name")]
         [Required]
         public string Name { get; set; }
         [DisplayName("Mobile No")]

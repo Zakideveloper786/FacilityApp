@@ -32,7 +32,7 @@ namespace FacilityApp.Controllers
             //}
             //if (ModelState.IsValid)
             //{
-            var user = _db.Users.Where(x => x.MobileNo == obj.MobileNo).FirstOrDefault();
+            var user = _db.Users.Where(x => x.UserName == obj.UserName).FirstOrDefault();
                 if (user!=null && BCrypt.Net.BCrypt.Verify(obj.Password , user.Password) )
                 {
                     TempData["success"] = "Login Successful";

@@ -36,7 +36,7 @@ namespace FacilityApp.Controllers.api
             {
                var user=  _db.Users.Where(x => x.UserName.ToLower() == request.UserName.ToLower()).FirstOrDefault();
               
-                if (user == null || (user != null && BCrypt.Net.BCrypt.Verify(request.Password,user.Password)))
+                if (user == null || (user != null && !BCrypt.Net.BCrypt.Verify(request.Password,user.Password)))
                 {
                     apiResponse= ErrorResponse(message: Constants.SignInErrorMessge);
                 }
@@ -62,6 +62,40 @@ namespace FacilityApp.Controllers.api
 
         [Authorize]
         [HttpPost]
+        public APIResponse RequestListing(ListRequest request)
+        {
+            APIResponse apiResponse = null;
+            try
+            {
+
+                var requestItems = (from m in _db.Maintanance
+                                    join
+                r in _db.RequestStatus on m.RequestStatusId equals r.RequestStatusId
+                                    join u in _db.Users on m.TenantId equals u.UserId
+                                    where m.Status == Statics.RecordState.Active && r.Status == Statics.RecordState.Active
+                                    && u.UserId == Statics.Userid
+                                    select new RequestItem() { RequestId = m.MaintananceId, Status = r.Name, CreatedDate = m.CreatedDate }).ToList<RequestItem>();
+
+                if (requestItems == null)
+                {
+                    requestItems = new List<RequestItem>();
+                }
+
+                apiResponse = SuccessResponse(response: requestItems);
+
+
+            }
+
+            catch (Exception ex)
+            {
+                apiResponse = HandleException(ex);
+            }
+
+            return apiResponse;
+        }
+
+        [Authorize]
+        [HttpPost]
         public APIResponse CreateRequest(MainteinanceRequest request)
         {
             APIResponse apiResponse = null;
@@ -73,6 +107,7 @@ namespace FacilityApp.Controllers.api
                 var tenantid= _db.Users.Where(x => x.UserId == Statics.Userid).Select(x => x.TenantId).FirstOrDefault();
                 var tenatntdetails = _db.TenantFlatDetails.Where(x => x.TenantId == tenantid).FirstOrDefault();
                 maintenance.BuildingId = (int)tenatntdetails.BuildingId ;
+                maintenance.RequestStatusId = 1;
                 maintenance.FlatId = tenatntdetails.FlatId;
                 AddDetais(maintenance);
                 _db.Maintanance.Add(maintenance);

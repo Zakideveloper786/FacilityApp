@@ -50,14 +50,21 @@ namespace FacilityApp.ViewModels
 
     public class ListRequest
     {
-
+        public int userId { get; set; }
     }
 
     public class ListResponse
     {
-
+        public List<RequestItem> ResultData { get; set; }
     }
 
+    public class RequestItem
+    {
+        public int RequestId { get; set; }
+        public string  Status { get; set; }
+        public DateTime CreatedDate { get; set; }
+
+    }
     public class ChangePwRequest
     {
 

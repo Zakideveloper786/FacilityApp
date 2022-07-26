@@ -49,7 +49,7 @@ public class FacilityAppDbContext :DbContext
     public DbSet<Parking> Parking { get; set; }
     public DbSet<FlatType> FlatTypes { get; set; }
 
-
+    public DbSet<RequestStatus> RequestStatus { get; set; }
 
 
 
