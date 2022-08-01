@@ -29,6 +29,8 @@ namespace FacilityApp.ViewModels
     {
         public string Token { get; set; }
         public string Name { get; set; }
+        public string RoleName { get; set; }
+
 
         public string UserName { get; set; }
 
@@ -36,9 +38,13 @@ namespace FacilityApp.ViewModels
 
     public class MainteinanceRequest
     {
-
+    
         public int IssueTypeId { get; set; }
         public string Description { get; set; }
+
+        public int StatusId { get; set; }
+
+        public int? RequestId { get; set; }
 
     }
 
@@ -61,6 +67,13 @@ namespace FacilityApp.ViewModels
     public class RequestItem
     {
         public int RequestId { get; set; }
+        public int StatusId { get; set; }
+
+        public int IssueTypeId { get; set; }
+        public string Description { get; set; }
+
+
+
         public string  Status { get; set; }
         public DateTime CreatedDate { get; set; }
 
@@ -73,5 +86,11 @@ namespace FacilityApp.ViewModels
     public class ChangePwResponse
     {
 
+    }
+
+    public class KeyValue
+    {
+        public string Key { get; set; }
+        public string Value { get; set; }
     }
 }

@@ -18,5 +18,7 @@
         }
 
         public static int Userid { get; set; }
+        public static string RoleName { get; set; }
+
     }
 }

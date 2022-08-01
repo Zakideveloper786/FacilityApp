@@ -8,14 +8,14 @@ namespace FacilityApp.Controllers.api
     public static class Util
     {
         static string secretKey = "WonderWorldyoutubetestdriversalman";
-        public static  string GenerateToken(string  userid)
+        public static  string GenerateToken(string  userid,string rolename)
         {
             // generate token that is valid for 7 daysss
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(secretKey);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[] { new Claim("id", userid.ToString()) }),
+                Subject = new ClaimsIdentity(new[] { new Claim("id", userid.ToString()), new Claim("rolename", rolename) }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
@@ -23,8 +23,9 @@ namespace FacilityApp.Controllers.api
             return tokenHandler.WriteToken(token);
         }
 
-        public static int? ValidateToken(string token)
+        public static Tuple<int,string>? ValidateToken(string token)
         {
+            Tuple<int,string> tuple= new Tuple<int,string>(0,"");
             if (token == null)
                 return null;
 
@@ -44,11 +45,13 @@ namespace FacilityApp.Controllers.api
 
                 var jwtToken = (JwtSecurityToken)validatedToken;
                 var userId = int.Parse(jwtToken.Claims.First(x => x.Type == "id").Value);
-
+                var rolename = Convert.ToString((jwtToken.Claims.First(x => x.Type == "rolename").Value));
+               
+                tuple=new Tuple<int,string>(userId, rolename);
                 // return user id from JWT token if validation successful
-                return userId;
+                return tuple;
             }
-            catch
+            catch(Exception ex)
             {
                 // return null if validation fails
                 return null;

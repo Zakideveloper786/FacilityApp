@@ -20,7 +20,8 @@ public class AuthorizeAttribute : Attribute, IAuthorizationFilter
             {
                 authorized = true;
                 context.HttpContext.Items["userid"] = id;
-                Statics.Userid = Convert.ToInt32(id);
+                Statics.Userid = Convert.ToInt32(id.Item1);
+                Statics.RoleName=Convert.ToString(id.Item2);
             }
         }
         if(!authorized)

@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContextFactory<FacilityAppDbContext>(options => options.UseSqlServer(
@@ -20,7 +20,11 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddCors();
+var alloworigin = "AllowOrigin";
+builder.Services.AddCors(c =>
+{
+    c.AddPolicy(name: alloworigin, options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -36,6 +40,7 @@ else
 }
 
 app.UseHttpsRedirection();
+app.UseCors(alloworigin);
 app.UseStaticFiles();
 
 app.UseRouting();
