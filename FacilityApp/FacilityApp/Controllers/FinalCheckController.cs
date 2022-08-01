@@ -34,7 +34,7 @@ namespace FacilityApp.Controllers
                                                  IssueType = i.Name,
                                                  ImagePath = m.ImagePath,
                                                  IssueDetails = m.IssueDetails,
-                                                 Status = i.Status,
+                                            //     Status = i.Status,
                                                  UserName = (u.Name ?? "")
 
                                              }).ToList();

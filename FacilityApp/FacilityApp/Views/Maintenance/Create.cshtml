@@ -36,6 +36,13 @@
 
 			<span asp-validation-for="IssueTypeId" class="text-danger"></span>
 		</div>
+			<div class="row ">
+		<div class="mb-3 col-sm-6">
+			<label asp-for="RequestStatusId"></label>
+				       <select  asp-for="RequestStatusId" class="form-control"  asp-items='@(new SelectList(@ViewBag.requeststatus,"RequestStatusId","Name"))'></select>		
+@*
+			<span asp-validation-for="IssueTypeId" class="text-danger"></span>*@
+		</div>
 		@*<div class="mb-3">
 			<label asp-for="RoleId"></label>
 			<select  asp-for="RoleId" class="form-control"  asp-items='@(new SelectList(@ViewBag.Roles,"RoleId","RoleName"))'> </select>

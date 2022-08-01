@@ -13,5 +13,11 @@ namespace FacilityApp.Controllers
             obj.CreatedDate = DateTime.Now;
             return obj;
         }
+        protected dynamic UpdateDetails(dynamic obj)
+        {
+            obj.UpdatedBy = HttpContext.Session.GetInt32("UserId") ?? 0;
+            obj.UpdatedDate = DateTime.Now;
+            return obj;
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace FacilityApp.ViewModels
         public string UserName { get; set; }
 
         public string? ImagePath { get; set; }
-        public RecordState Status { get; set; }
+        public string Status { get; set; }
 
     }
 }

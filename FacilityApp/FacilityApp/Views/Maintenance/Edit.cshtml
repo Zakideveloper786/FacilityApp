@@ -16,12 +16,17 @@
         </script>
 	<div class="container   p-5	">
 	<div class="  ">
-		<div class="row ">
-			<h2 class="text-primary"> Maintenance Details</h2>
-			       <input asp-for="MaintananceId" hidden/>
+	<input asp-for="MaintananceId" hidden/>
+	
 
+
+
+
+
+	@*	<div class="row ">
+			<h2 class="text-primary"> Maintenance Details</h2>
 			<hr />
-		</div>
+		</div>*@
 	
 		
 		<div class="row ">
@@ -34,8 +39,7 @@
 		<div class="row ">
 		<div class="mb-3 col-sm-6">
 			<label asp-for="IssueTypeId"></label>
-				       				       <select  asp-for="IssueTypeId" class="form-control"  asp-items='@(new SelectList(@ViewBag.issues,"IssueTypeId","Name"))'></select>		
-
+				       <select  asp-for="IssueTypeId" class="form-control"  asp-items='@(new SelectList(@ViewBag.issues,"IssueTypeId","Name"))'></select>		
 
 			<span asp-validation-for="IssueTypeId" class="text-danger"></span>
 		</div>
@@ -61,13 +65,19 @@
 			<span asp-validation-for="UserId" class="text-danger"></span>
 		</div>
 		</div>
-					<div class="row ">
+		<div class="mb-3 col-sm-6">
+			<label asp-for="RequestStatusId"></label>
+				       <select  asp-for="RequestStatusId" class="form-control"  asp-items='@(new SelectList(@ViewBag.requeststatus,"RequestStatusId","Name"))'></select>		
+@*
+			<span asp-validation-for="IssueTypeId" class="text-danger"></span>*@
+		</div>
+				@*	<div class="row ">
 		<div class="mb-3 col-sm-6">
 			<label asp-for="ImagePath"></label>
 			<input type="file"   class="form-control"   rows="3" cols="40"/>
 			<span asp-validation-for="ImagePath" class="text-danger"></span>
 		</div>
-		</div>
+		</div>*@
 	<button type="submit" class="btn btn-primary" style="width:150px">Edit</button>
 		<a asp-controller="Maintenance" asp-action="Index" class="btn btn-secondary" style="width:150px">
 			Back to List
